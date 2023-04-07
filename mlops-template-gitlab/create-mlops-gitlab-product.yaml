@@ -330,6 +330,8 @@ Resources:
               - Effect: Allow
                 Action:
                   - 'iam:PassRole'
+                Resource:
+                  - !Join ['', ['arn:aws:iam::', !Ref AWS::AccountId, ':role/SM-Gitlab-Example-Use-Role-*']]
               - Effect: Allow
                 Action:
                   - 'ec2:CreateNetworkInterface'
@@ -341,7 +343,7 @@ Resources:
                   - 'logs:CreateLogStream'
                   - 'logs:PutLogEvents'
                 Resource:
-                  - !Join ['', ['arn:aws:iam::', !Ref AWS::AccountId, ':role/SM-Gitlab-Example-Use-Role-*']]
+                  - '*'
               - Effect: Allow
                 Action:
                   - 'sagemaker:AddTags'

@@ -161,8 +161,10 @@ Resources:
       State: "ENABLED"
       Targets:
         -
-          Arn: !GetAtt SNSModelRegisteredTopic.Arn
-          Id: !Sub sagemaker-${SageMakerProjectName}-modelregistered
+          Arn: 
+            - !Ref SNSModelRegisteredTopic
+#            !GetAtt SNSModelRegisteredTopic.TopicArn
+          Id: !Sub sagemaker-${SageMakerProjectName}-SNS
 
 
   ModelDeploySageMakerEventRule:
