@@ -162,7 +162,7 @@ Resources:
       Targets:
         -
           Arn: 
-            - !Ref SNSModelRegisteredTopic
+            !Ref SNSModelRegisteredTopic
 #            !GetAtt SNSModelRegisteredTopic.TopicArn
           Id: !Sub sagemaker-${SageMakerProjectName}-SNS
 
