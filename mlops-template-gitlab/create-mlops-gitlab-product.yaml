@@ -482,15 +482,15 @@ Resources:
                   - !Ref GitLabIAMUserAccessKeySecret
       RoleName: !Join ['-', ['SM-Gitlab-Example-Use-Role', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
 
-  ServiceCatalogProductRoleLaunchContstraint:
-    Type: AWS::ServiceCatalog::LaunchRoleConstraint
-    DependsOn: 
-      - ServiceCatalogProductAssociation
-    Properties: 
-      Description: Role for launching the mlops GitLab endpoint product
-      PortfolioId: !Ref PortfolioIDParameter
-      ProductId: !Ref ServiceCatalogProduct
-      RoleArn: !GetAtt ServiceCatalogProductLaunchRole.Arn
+#  ServiceCatalogProductRoleLaunchContstraint:
+#    Type: AWS::ServiceCatalog::LaunchRoleConstraint
+#    DependsOn: 
+#      - ServiceCatalogProductAssociation
+#    Properties: 
+#      Description: Role for launching the mlops GitLab endpoint product
+#      PortfolioId: !Ref PortfolioIDParameter
+#      ProductId: !Ref ServiceCatalogProduct
+#      RoleArn: !GetAtt ServiceCatalogProductLaunchRole.Arn
 
   CustomBackedLambda:
     Type: AWS::Lambda::Function

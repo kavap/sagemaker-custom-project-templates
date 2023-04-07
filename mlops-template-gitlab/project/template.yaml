@@ -67,27 +67,6 @@ Parameters:
     Type: AWS::EC2::SecurityGroup::Id
     Description: SageMaker Studio Security Group ID. Git Lab CI/CD Pipeline will be created in this security group.
 
-
-Metadata:
-  AWS::CloudFormation::Interface:
-    ParameterLabels:
-      GitLabServer:
-        default: "GitLab Server URI. e.g. https://gitlab.com"
-      RepositoryBaseUrl:
-        default: "Base URL for your GitLab Repositories. e.g. https://gitlab.com/<username>"
-      ModelBuildCodeRepositoryName:
-        default: "Model Build Repository Name"
-      ModelDeployCodeRepositoryName:
-        default: "Model Deploy Repository Name"
-      GitLabGroupID:
-        default: "GitLab Group ID. 'None' if using root group"
-      SageMakerStudioVPC :
-        default: "SageMaker Studio VPC ID. This is same VPC where GitLab EC2 instance is deployed."        
-      SageMakerStudioSubnet : 
-        default: "SageMaker Studio Subnet ID. This is same subnet where GitLab EC2 instance is deployed."
-      SageMakerStudioSecurityGroup :
-        default: "SageMaker Studio Security Group ID. This is same security group that surrounds GitLab EC2 instance and SageMaker Studio App."
-
 Resources:
   MlOpsArtifactsBucket:
     Type: AWS::S3::Bucket
