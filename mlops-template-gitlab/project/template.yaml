@@ -226,8 +226,8 @@ Resources:
   SNSModelRegisteredTopic: 
     Type: AWS::SNS::Topic
     Properties: 
-      DisplayName: !Sub ${SNSModelRegisteredTopicName}-{SageMakerProjectId}
-      TopicName: !Sub ${SNSModelRegisteredTopicName}-{SageMakerProjectId}
+      DisplayName: !Sub ${SNSModelRegisteredTopicName}-${SageMakerProjectId}
+      TopicName: !Sub ${SNSModelRegisteredTopicName}-${SageMakerProjectId}
       Subscription: 
         - 
           Endpoint: !Sub ${ModelApproverEmail}
@@ -236,8 +236,8 @@ Resources:
   SNSModelMonitoringTopic: 
     Type: AWS::SNS::Topic
     Properties: 
-      DisplayName: !Sub ${SNSModelMonitoringTopicName}-{SageMakerProjectId}
-      TopicName: !Sub ${SNSModelMonitoringTopicName}-{SageMakerProjectId}
+      DisplayName: !Sub ${SNSModelMonitoringTopicName}-${SageMakerProjectId}
+      TopicName: !Sub ${SNSModelMonitoringTopicName}-${SageMakerProjectId}
       Subscription: 
         - 
           Endpoint: !Sub ${ModelMonitoringAlertsEmail}
