@@ -70,38 +70,6 @@ Parameters:
 
 Metadata:
   AWS::CloudFormation::Interface:
-    ParameterGroups:
-      -
-        Label:
-          default: "Code Repository Info"
-        Parameters:
-          - GitLabServer
-          - RepositoryBaseUrl
-          - ModelBuildCodeRepositoryName
-          - ModelDeployCodeRepositoryName
-          - GitLabGroupID
-      -
-        Label:
-          default: "SageMaker Project Info"
-        Parameters:
-          - SageMakerProjectName
-          - SageMakerProjectId
-      -
-        Label:
-          default: "SageMaker Alerting informaton"
-        Parameters:
-          - SNSModelRegisteredTopicName
-          - ModelApproverEmail
-          - SNSModelMonitoringTopicName
-          - ModelMonitoringAlertsEmail
-      - 
-        Label:
-          default: "SageMaker Studio VPC Info"
-        Parameters:
-          - SageMakerStudioVPC
-          - SageMakerStudioSubnet
-          - SageMakerStudioSecurityGroup
-
     ParameterLabels:
       GitLabServer:
         default: "GitLab Server URI. e.g. https://gitlab.com"
