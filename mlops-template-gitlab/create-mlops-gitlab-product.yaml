@@ -492,6 +492,22 @@ Resources:
                 Resource:
                   - !Ref GitLabIAMUserSecretKeySecret
                   - !Ref GitLabIAMUserAccessKeySecret
+              - Effect: Allow
+                Action:
+                  - 'ec2:CreateNetworkInterface'
+                  - 'ec2:DescribeNetworkInterfaces'
+                  - 'ec2:DeleteNetworkInterface'
+                  - 'ec2:AssignPrivateIpAddresses'
+                  - 'ec2:UnassignPrivateIpAddresses'
+                  - 'logs:CreateLogGroup'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                Resource:
+                  - '*'
+              - Effect: Allow
+                Action:
+                  - 'sagemaker:AddTags'
+                Resource: '*'
       RoleName: !Join ['-', ['SM-Gitlab-Example-Use-Role', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
 
 #  ServiceCatalogProductRoleLaunchContstraint:
