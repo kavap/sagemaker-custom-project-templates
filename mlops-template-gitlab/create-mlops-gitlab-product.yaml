@@ -330,6 +330,16 @@ Resources:
               - Effect: Allow
                 Action:
                   - 'iam:PassRole'
+              - Effect: Allow
+                Action:
+                  - 'ec2:CreateNetworkInterface'
+                  - 'ec2:DescribeNetworkInterfaces'
+                  - 'ec2:DeleteNetworkInterface'
+                  - 'ec2:AssignPrivateIpAddresses'
+                  - 'ec2:UnassignPrivateIpAddresses'
+                  - 'logs:CreateLogGroup'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
                 Resource:
                   - !Join ['', ['arn:aws:iam::', !Ref AWS::AccountId, ':role/SM-Gitlab-Example-Use-Role-*']]
               - Effect: Allow
