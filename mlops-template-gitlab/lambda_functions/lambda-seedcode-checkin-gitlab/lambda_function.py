@@ -7,6 +7,10 @@ import base64
 from botocore.exceptions import ClientError
 import logging
 import uuid
+import certifi
+import tempfile
+from requests import get
+
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -58,6 +62,16 @@ def get_secret(secret):
             
     return None
 
+def create_custom_ca_bundle(carootcert, cabundlelocation):
+    original_ca_bundle = certifi.where()
+
+    with open(original_ca_bundle, 'rb') as original_file, open(cabundlelocation, 'wb') as custom_file:
+        custom_file.write(original_file.read())
+        custom_file.write(b'\n')
+        custom_file.write(carootcert.encode('utf-8'))
+        
+    return 
+
 def lambda_handler(event, context):
     ''' '''
     response_data = {}
@@ -86,10 +100,23 @@ def lambda_handler(event, context):
     except Exception as e:
         logging.error(FETCH_GITLAB_TOKEN_SECRET_ERROR_MSG)
         cfnresponse.send(event, context, cfnresponse.FAILED, response_data)
-        return { 
-            'message' : FETCH_GITLAB_TOKEN_SECRET_ERROR_MSG
+    
+    FETCH_CAROORCERT_SECRET_ERROR_MSG = "CAROOTCERT value was not retrieved from Secrets Manager."
+            
+    try:
+        '''get caroot cert from secrets manager'''
+        carootcert = get_secret('CARootCertificateSecretName')
+        if carootcert is None:
+            raise Exception(FETCH_CAROORCERT_SECRET_ERROR_MSG)
         
-        }
+        '''REQUESTS_CA_BUNDLE location where combined certificate file would be created'''
+        cabundlelocation = os.environ['REQUESTS_CA_BUNDLE']
+        
+        create_custom_ca_bundle(carootcert,cabundlelocation)
+        
+    except Exception as e:
+        logging.error("Error while creating custom CA bundle file")
+        cfnresponse.send(event, context, cfnresponse.FAILED, response_data)
 
     #Fetch IAM Access Key ID Secret
 

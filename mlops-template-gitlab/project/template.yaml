@@ -92,7 +92,9 @@ Resources:
           BuildProjectName: !Sub ${ModelBuildCodeRepositoryName}
           SageMakerProjectName: !Sub ${SageMakerProjectName}
           SageMakerProjectId: !Sub ${SageMakerProjectId}
+          REQUESTS_CA_BUNDLE: "./custom_ca_bundle.pem"
           GitLabTokenSecretName: AWSDEFAULT___GITLAB_TOKEN_SECRET_NAME___
+          CARootCertificateSecretName: AWSDEFAULT___CAROOTCERT_SECRET_NAME___
           IAMAccessKeySecretName: AWSDEFAULT___IAM_ACCESS_KEY_SECRET_NAME___
           IAMSecretKeySecretName: AWSDEFAULT___IAM_SECRET_KEY_SECRET_NAME___
           SeedCodeBucket: AWSDEFAULT___CODE_STAGING_BUCKET___
@@ -134,6 +136,8 @@ Resources:
           SageMakerProjectName: !Sub ${SageMakerProjectName}
           SageMakerProjectId: !Sub ${SageMakerProjectId}
           GitLabTokenSecretName: AWSDEFAULT___GITLAB_TOKEN_SECRET_NAME___
+          CARootCertificateSecretName: AWSDEFAULT___CAROOTCERT_SECRET_NAME___
+          REQUESTS_CA_BUNDLE: "./custom_ca_bundle.pem"
           Region: !Ref AWS::Region
           GroupId: !Sub ${GitLabGroupID}
       VpcConfig:

@@ -136,6 +136,14 @@ Resources:
         SecretString: 
           ENTER_GITLAB_TOKEN_HERE
 
+  CARootCertificateSecret:
+      Type: AWS::SecretsManager::Secret
+      Properties: 
+        Description: String
+        Name: !Join ['-',['SageMaker-Projects-ca-rootcert', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
+        SecretString: 
+          STORE PRIVATE CA CERTIFICATE HERE
+
   GitLabIAMUser:
     Type: AWS::IAM::User
     Properties: 
@@ -384,6 +392,10 @@ Resources:
                 Action: 
                   - 'secretsmanager:GetSecretValue'
                 Resource: !Ref GitLabTokenSecret
+              - Effect: Allow
+                Action:
+                  - 'secretsmanager:GetSecretValue'
+                Resource: !Ref CARootCertificateSecret
               - Action:
                   - 'cloudformation:CreateChangeSet'
                   - 'cloudformation:CreateStack'
@@ -689,6 +701,7 @@ Resources:
         AWSDEFAULT___CODE_STAGING_BUCKET___: !Ref BootstrapS3Bucket
         AWSDEFAULT___PROJECT_NAME___: !Ref SageMakerProjectsProjectNameParameter
         AWSDEFAULT___GITLAB_TOKEN_SECRET_NAME___: !Join ['-',['SageMaker-Projects-GitLab-Token', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
+        AWSDEFAULT___CAROOTCERT_SECRET_NAME___: !Join ['-',['SageMaker-Projects-ca-rootcert', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
         AWSDEFAULT___IAM_ACCESS_KEY_SECRET_NAME___: !Join ['-',['SageMaker-Projects-GitLab-UserAccessKey', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
         AWSDEFAULT___IAM_SECRET_KEY_SECRET_NAME___: !Join ['-',['SageMaker-Projects-GitLab-UserSecretKey', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
         AWSDEFAULT___USE_ROLE___: !GetAtt ServiceCatalogProductUseRole.Arn
